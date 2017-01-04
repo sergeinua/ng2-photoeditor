@@ -1,14 +1,11 @@
 // Type definitions for PhotoEditor
 // Project: https://www.photoeditorsdk.com
-// Definitions by: Sandor Huszar <https://github.com>
+// Definitions by: Sandor Huszar <https://github.com/sandor-huszar>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 
 declare namespace LoadPhotoEditor {
-
 }
-
-
 
 declare namespace PhotoEditor {}
 
@@ -55,8 +52,3 @@ declare namespace PhotoEditor.Handlers{
     */
     export var onEditorClosed: (actions: Actions.SDKActions) => void;
 }
-
-
-//declare module "LoadPhotoEditor" {
-//    export = LoadPhotoEditor;
-//}
