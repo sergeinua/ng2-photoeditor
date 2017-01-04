@@ -4,7 +4,6 @@
   "description": "Photo editor for angular2 applications.",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "private": true,
   "author": {
     "name": "Sandor Huszar",
     "email": "sandor.huszar@appo.io"
