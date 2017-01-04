@@ -1,0 +1,24 @@
+{
+  "name": "ng2-photoeditor",
+  "version": "0.0.1",
+  "description": "Photo editor for angular2 applications.",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "private": true,
+  "author": {
+    "name": "Sandor Huszar",
+    "email": "sandor.huszar@appo.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sandor-huszar/ng2-photoeditor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sandor-huszar/ng2-photoeditor/issues"
+  },
+  "tags": [
+    "photoeditor",
+    "angular2",
+    "typescript"
+  ]
+}
