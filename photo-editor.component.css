@@ -1,0 +1,35 @@
+#photo-host {
+    width: 100%;
+    height: 455px;
+    overflow: auto;
+    margin: 20px auto;
+}
+.actions {
+    text-align: right;
+    padding: 2.5%;
+    border-radius: 0 0 5px 5px;
+    display: table;
+    width: 100%;
+    background: #f2f0ed;
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJod…BoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+    background: -moz-linear-gradient(top, #f2f0ed 0%, #fafaf9 3%, #ffffff 6%, #ffffff 100%);
+    background: -webkit-linear-gradient(top, #f2f0ed 0%,#fafaf9 3%,#ffffff 6%,#ffffff 100%);
+    background: linear-gradient(to bottom, #f2f0ed 0%,#fafaf9 3%,#ffffff 6%,#ffffff 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f0ed', endColorstr='#ffffff',GradientType=0 );
+}
+.action-button, .action-button:hover, .action-button:focus {
+    margin-left: 1%;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    background: #c0b9a8;
+    border-bottom: 1px solid #b1aba4;
+    display: inline-block;
+    cursor: pointer;
+}
+.cancel-button {float: left;}
+.save-button {float: right;}

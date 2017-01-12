@@ -1,13 +1,21 @@
-import { Component, Input, Output, EventEmitter, forwardRef, ElementRef, ViewChild, OnChanges, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, OnChanges, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 
 const PhotoEditorSDK = require('./src/PhotoEditorSDK/3.5.0/js/PhotoEditorSDK.js');
 const PhotoEditorReactUI = require('./src/PhotoEditorSDK/3.5.0/js/PhotoEditorReactUI.js');
 
 @Component({
     selector: 'photo-editor',
-    template: `<div #host class="host"></div><div class="buttons"><button (click)="saveClick()">Save</button></div>`,
+    encapsulation: ViewEncapsulation.None,
+    template: `
+        <div #host id="photo-host"></div>
+        <div class="actions">
+            <a class="action-button cancel-button" (click)="cancelClick()">Cancel</a>
+            <a class="action-button save-button" (click)="saveClick()">Save</a>
+	</div>
+    `,
     styleUrls: [
-        './src/PhotoEditorSDK/3.5.0/css/PhotoEditorReactUI.min.css'
+        './src/PhotoEditorSDK/3.5.0/css/PhotoEditorReactUI.css',
+        './photo-editor.component.css'
     ],
 })
 export class PhotoEditorComponent implements OnInit, OnDestroy, OnChanges {
@@ -17,6 +25,7 @@ export class PhotoEditorComponent implements OnInit, OnDestroy, OnChanges {
     propagateChange = (_: any) => { };
     @Input() imageSrc: string;
     @Output() saveImageEvent:EventEmitter<Event> = new EventEmitter<any>();
+    @Output() cancelEvent:EventEmitter<Event> = new EventEmitter<any>();
     
     constructor(el: ElementRef) {
         this.el = el;
@@ -43,11 +52,11 @@ export class PhotoEditorComponent implements OnInit, OnDestroy, OnChanges {
     
     writeValue(value: any) {
         //console.log(value);
-        if (this.editor) {
-            if (value && value !== '') {
-                this.editor.setContent(value);
-            }
-        }
+//        if (this.editor) {
+//            if (value && value !== '') {
+
+//            }
+//        }
     }
     registerOnChange(fn: any) {
         this.propagateChange = fn;
@@ -57,6 +66,7 @@ export class PhotoEditorComponent implements OnInit, OnDestroy, OnChanges {
     createEditor() {
         let myImage = new Image();
         myImage.crossOrigin = 'anonymous';
+        myImage.setAttribute('crossOrigin', 'anonymous');
         myImage.addEventListener('load', () => {
             this.editor = new PhotoEditorSDK.UI.ReactUI({
                 container: this.host.nativeElement,
@@ -64,22 +74,33 @@ export class PhotoEditorComponent implements OnInit, OnDestroy, OnChanges {
                 showCloseButton: false,
                 editor: {
                     image: myImage,
-                    //preferredRenderer: 'webgl'
-                  },
+                    //preferredRenderer: 'canvas',//canvas,webgl
+                    export: {
+                        showButton: false,
+                        download: false
+                    }
+                },
                 //apiKey: 'your-api-key', // <-- Please replace this with your API key
                 assets: {
                   baseUrl: '/assets/photoeditor' // <-- This should be the absolute path to your `assets` directory
-                }
+                },
+                title: 'Bfrow Photo Editor',
+                enableUpload: false,
+                enableWebcam: false,
+                showHeader: false
               });
         })
         myImage.src = this.imageSrc;
     }
     
     saveClick() {
-        this.editor.export(PhotoEditorSDK.RenderType.BUFFER,PhotoEditorSDK.ImageFormat.PNG,1)
+        this.editor.export(false)
             .then(result => {
-                //console.log(result);
                 this.saveImageEvent.emit(result);
             });
+    }
+    
+    cancelClick() {
+        this.cancelEvent.emit();
     }
 }
